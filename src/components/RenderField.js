@@ -9,7 +9,7 @@ const RenderField = ({
   value,
   ...custom,
 }) => {
-  console.log('input', input.value)
+  // console.log('input', input.value)
   return  <div>
       <Dropdown
         disabled={disabled}

@@ -1,6 +1,6 @@
 import { Field, reduxForm } from 'redux-form'
 import React, { useEffect } from 'react'
-import { getItemsByTableId, getSectionsToReset } from '../../store/selectors/selects'
+import { getInitialState, getItemsByTableId, getSectionsToReset } from '../../store/selectors/selects'
 
 import RenderField from '../RenderField'
 import { connect } from 'react-redux'
@@ -23,6 +23,8 @@ let Selects = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getSectionsToReset])
 
+  // console.log('secondSelectOptons' , secondSelectOptons)
+
   return (
     <form onSubmit={handleSubmit}>
       <Field
@@ -35,7 +37,7 @@ let Selects = props => {
       />
       <br />
       <Field
-        disabled={!secondSelectOptons.length}
+        disabled={secondSelectOptons.length === 1}
         onChange={(v) => {
           rootSelectSetSelected(v, 'ti2')
         }}
@@ -45,7 +47,7 @@ let Selects = props => {
       />
       <br />
       <Field
-        disabled={!thirdSelectOptons.length}
+        disabled={thirdSelectOptons.length === 1}
         onChange={(v) => {
           rootSelectSetSelected(v, 'ti3')
         }}
@@ -73,7 +75,8 @@ const mapStateToProps = (state) => {
     roootSelectOptons: getItemsByTableId(state, 'ti1'),
     secondSelectOptons: getItemsByTableId(state, 'ti2'),
     thirdSelectOptons: getItemsByTableId(state, 'ti3'),
-    getSectionsToReset: getSectionsToReset(state)
+    getSectionsToReset: getSectionsToReset(state),
+    initialValues: getInitialState(state)
   }
 }
 

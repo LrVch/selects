@@ -2,10 +2,10 @@ import { createSelector } from 'reselect'
 
 export const selectsState = state => state.selects
 
-export const getTables = createSelector(
-  selectsState,
-  selectsState => selectsState.tables
-)
+// export const getTables = createSelector(
+//   selectsState,
+//   selectsState => selectsState.tables
+// )
 
 export const getSectionsToReset = createSelector(
   selectsState,
@@ -30,15 +30,27 @@ export const getItemsByTableId = createSelector(
   (table, parentTableId, getParentTableSelected) => {
 
     if (!parentTableId) {
+      // console.log(table.items)
       return table.items
     } else if (!!(parentTableId && getParentTableSelected)) {
       const filtered = table.items.filter(item => {
         return item.parentid ? item.parentid === getParentTableSelected : item
       })
 
-      return filtered.length > 1 ? filtered : []
+      // return filtered.length > 1 ? filtered : []
+      return filtered
     } else {
-      return []
+      // console.log('other')
+      return [{
+        key: 'None',
+        text: 'No selected',
+        value: 'None',
+      },]
     }
   }
+)
+
+export const getInitialState = createSelector(
+  selectsState,
+  selectsState => selectsState.initialState
 )

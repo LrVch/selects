@@ -2,6 +2,11 @@ import * as actionsTypes from '../actions';
 
 const initialState = {
   sectionsToReset: [],
+  initialState: {
+    'ti1': 'None',
+    'ti2': 'None',
+    'ti3': 'None'
+  },
   tables: {
     'ti1': {
       id: 'ti1',
